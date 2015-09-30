@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eceff1"
+    tools:context="com.agroho.islamicapp.FragmentNavDrawer">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FB8C00">
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_abstract" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/container"
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_below="@+id/drawerList"
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_below="@+id/separator"
+        android:padding="8dp"
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"/>
+
+
+
+
+</RelativeLayout>
