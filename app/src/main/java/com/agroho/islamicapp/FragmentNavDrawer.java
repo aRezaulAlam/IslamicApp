@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
@@ -23,17 +24,17 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickListener{
+public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickListener {
 
     private RecyclerView recyclerView;
 
     //private RecyclerView recyclerView;
     public static final String PREF_FILE_NAME = "testpref";
-    private static final String KEY_USER_LEARNED_DRAWER="user_learned_drawer";
+    private static final String KEY_USER_LEARNED_DRAWER = "user_learned_drawer";
     private View containerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-   // private DataAdapter adapter;
+    // private DataAdapter adapter;
     private DataAdapter adapter;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
@@ -45,9 +46,9 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnedDrawer =Boolean.valueOf(readFromSharedPreference(getActivity(),KEY_USER_LEARNED_DRAWER,"true"));
-        if(savedInstanceState!=null){
-            mFromSavedInstanceState=true;
+        mUserLearnedDrawer = Boolean.valueOf(readFromSharedPreference(getActivity(), KEY_USER_LEARNED_DRAWER, "true"));
+        if (savedInstanceState != null) {
+            mFromSavedInstanceState = true;
         }
     }
 
@@ -59,7 +60,7 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
         View layout = inflater.inflate(R.layout.fragment_nav_drawer, container, false);
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        adapter = new DataAdapter(getActivity(),getData());
+        adapter = new DataAdapter(getActivity(), getData());
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -67,15 +68,14 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
         return layout;
     }
 
-    public static List<Information> getData(){
+    public static List<Information> getData() {
 
         List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.ask,R.drawable.ask,R.drawable.ask,R.drawable.ask,R.drawable.ask};
-        String[] titles = {"প্রশ্ন ও উত্তর","প্রশ্ন করুন", "মেসেজ বক্স","যোগাযোগ"};
+        int[] icons = {R.drawable.ask, R.drawable.ask, R.drawable.ask, R.drawable.ask, R.drawable.ask};
+        String[] titles = {"প্রশ্ন ও উত্তর", "প্রশ্ন করুন", "মেসেজ বক্স", "যোগাযোগ"};
 
-        for (int i =0; i<titles.length & i<icons.length;i++)
-        {
-            Information current  = new Information();
+        for (int i = 0; i < titles.length & i < icons.length; i++) {
+            Information current = new Information();
             current.iconId = icons[i];
             current.title = titles[i];
             data.add(current);
@@ -87,15 +87,15 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
-        mDrawerToggle = new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-                if (!mUserLearnedDrawer){
-                    mUserLearnedDrawer=true;
+                if (!mUserLearnedDrawer) {
+                    mUserLearnedDrawer = true;
                     saveToSharedPreference(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
                 }
                 getActivity().invalidateOptionsMenu();
@@ -109,7 +109,7 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
             }
         };
 
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState){
+        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
             mDrawerLayout.openDrawer(containerView);
         }
 
@@ -122,29 +122,40 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
         });
     }
 
-    public static void saveToSharedPreference(Context context, String preferenceName, String preferenceValue){
+    public static void saveToSharedPreference(Context context, String preferenceName, String preferenceValue) {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(preferenceName, preferenceValue);
         editor.apply();
     }
 
-    public static String readFromSharedPreference(Context context, String preferenceName, String DefaultValue){
+    public static String readFromSharedPreference(Context context, String preferenceName, String DefaultValue) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(preferenceName,DefaultValue);
+        return sharedPreferences.getString(preferenceName, DefaultValue);
     }
 
 
     @Override
     public void itemClicked(View view, int position) {
 
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        ((MainActivity)getActivity()).onDrawerItemCLicked(position);
 
+/*
         if (position==1){
             startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
-        } else
+        } else{
             Toast.makeText(getActivity(), "Item Clicked on" + position, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+}
         //startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
+
+
+    */
+
+
     }
+
 }

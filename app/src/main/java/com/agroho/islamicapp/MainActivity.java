@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
        // mTabs.setViewPager();
     }
 
+    void onDrawerItemCLicked(int position){
+        mPager.setCurrentItem(position);
+    }
+
 
 
     @Override
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         int icons[] = {R.drawable.whatshot,R.drawable.assesment,R.drawable.shif};
-        String[] tabtext = getResources().getStringArray(R.array.tabs);;
+        String[] tabtext = getResources().getStringArray(R.array.tabs);
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
