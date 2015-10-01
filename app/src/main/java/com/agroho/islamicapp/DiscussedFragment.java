@@ -1,6 +1,7 @@
 package com.agroho.islamicapp;
 
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +50,7 @@ public class DiscussedFragment extends Fragment {
     private RequestQueue requestQueue;
     public RecyclerView MostDiscussed;
     private QAAdapter adapterQA;
+    private ProgressDialog progressDialog;
 
     private ArrayList<QAInfo> listQA = new ArrayList<>();
 
@@ -86,6 +88,9 @@ public class DiscussedFragment extends Fragment {
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue=volleySingleton.getRequestQueue();
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Getting Discussed data...");
+        progressDialog.show();
         sendJsonRequest();
 
     }
@@ -96,8 +101,9 @@ public class DiscussedFragment extends Fragment {
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {
+                progressDialog.dismiss();
 
-               listQA =  parseJsonResponse(response);
+                listQA =  parseJsonResponse(response);
                 adapterQA.setQAList(listQA);
 
             }
@@ -106,11 +112,16 @@ public class DiscussedFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 VolleyErrorNotice(error);
+                progressDialog.dismiss();
+
 
             }
         });
 
         requestQueue.add(req);
+
+
+
     }
 
     private void VolleyErrorNotice(VolleyError error) {

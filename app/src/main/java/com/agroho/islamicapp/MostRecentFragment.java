@@ -1,6 +1,7 @@
 package com.agroho.islamicapp;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +47,9 @@ public class MostRecentFragment extends Fragment {
     private RequestQueue requestQueue;
     public RecyclerView MostRecent;
     private QAAdapter adapterQA;
+    private ProgressDialog progressDialog;
+
+
 
     private ArrayList<QAInfo> listQA = new ArrayList<>();
 
@@ -83,30 +87,41 @@ public class MostRecentFragment extends Fragment {
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue=volleySingleton.getRequestQueue();
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Getting Recent data...");
+        progressDialog.show();
         sendJsonRequest();
+
     }
 
     private void sendJsonRequest(){
 
         final String URL = "http://api.agroho.com/islam/json/qa_recent.php";
+
+
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {
+                progressDialog.dismiss();
 
                 listQA =  parseJsonResponse(response);
+
                 adapterQA.setQAList(listQA);
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progressDialog.dismiss();
                 VolleyErrorNotice(error);
 
             }
         });
 
         requestQueue.add(req);
+
+
+
     }
 
     private void VolleyErrorNotice(VolleyError error) {
@@ -167,6 +182,7 @@ public class MostRecentFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+
         //StringClass.t(getActivity(),listQA.toString());
         return listQA;
     }
@@ -185,6 +201,8 @@ public class MostRecentFragment extends Fragment {
         sendJsonRequest();
         return view;
     }
+
+
 
 
 }
