@@ -25,8 +25,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.content.SharedPreferences;
 import java.util.ArrayList;
+import android.preference.PreferenceManager;
 
 
 /**
@@ -48,6 +49,10 @@ public class MostRecentFragment extends Fragment {
     public RecyclerView MostRecent;
     private QAAdapter adapterQA;
     private ProgressDialog progressDialog;
+    public SharedPreferences preferenceSettings;
+
+    String userName;
+    String Contact;
 
 
 
@@ -90,13 +95,29 @@ public class MostRecentFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Getting Recent data...");
         progressDialog.show();
+
+
         sendJsonRequest();
 
     }
 
     private void sendJsonRequest(){
 
-        final String URL = "http://api.agroho.com/islam/json/qa_recent.php";
+        preferenceSettings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        String name = preferenceSettings.getString("username", userName);
+        String con = preferenceSettings.getString("contact", Contact);
+
+        Toast.makeText(getActivity(), name +" "+ con, Toast.LENGTH_SHORT).show();
+
+
+
+        if (name==null && con==null) {
+             name = "1";
+        }
+
+        final String URL = "http://api.agroho.com/islam/json/qa_recent.php?username="+name;
+
+        Toast.makeText(getActivity(), URL, Toast.LENGTH_SHORT).show();
 
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {

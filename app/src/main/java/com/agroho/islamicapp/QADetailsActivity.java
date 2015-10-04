@@ -1,11 +1,13 @@
 package com.agroho.islamicapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -52,15 +54,29 @@ public class QADetailsActivity extends AppCompatActivity {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Getting Discussed data...");
+        progressDialog.setMessage("Getting Answer...");
         progressDialog.show();
         sendJsonRequest();
     }
 
 
     private void sendJsonRequest(){
+        String id = "11";
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
 
-        final String URL = "http://api.agroho.com/islam/json/qa_details.php?qa_id=11";
+        if(b!=null)
+        {
+            id = (String) b.get("ID");
+
+        }
+
+        if (id==null){
+            id = "15";
+        }
+
+        final String URL = "http://api.agroho.com/islam/json/qa_details.php?qa_id="+id;
+        Log.d("URL",URL);
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {

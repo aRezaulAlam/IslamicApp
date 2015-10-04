@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 case CATEGORIES:
                     fragment = new CategoriesFragment();
                     break;
+
             }
             //MyFragment myFragment = MyFragment.getInstance(position);
             return fragment;

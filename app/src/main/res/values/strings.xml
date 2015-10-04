@@ -15,8 +15,8 @@
     <string name="title_activity_write_question_">WriteQuestion_Activity</string>
 
     <string-array name="tabs">
-        <item>আলোচিত</item>
-        <item>সাম্প্রতিক</item>
+        <item>প্রশ্ন ও উত্তর </item>
+        <item>আমার প্রশ্ন</item>
         <item>ক্যাটাগরি</item>
     </string-array>
     <string name="title_activity_qadetails">Answer</string>

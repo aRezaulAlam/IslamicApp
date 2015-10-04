@@ -140,9 +140,13 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
     @Override
     public void itemClicked(View view, int position) {
 
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        ((MainActivity)getActivity()).onDrawerItemCLicked(position);
-
+        if (position < 3) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            ((MainActivity) getActivity()).onDrawerItemCLicked(position);
+        }
+        else {
+            startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
+        }
 /*
         if (position==1){
             startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
