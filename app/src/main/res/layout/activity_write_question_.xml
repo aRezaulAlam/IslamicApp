@@ -51,7 +51,7 @@
             android:textColor="#263238"
             android:textColorHint="#263238"
             android:layout_below="@+id/name"
-            android:layout_above="@+id/btnRegister"
+            android:layout_above="@+id/btnSend"
             android:paddingBottom="10dp"/>
 
 
@@ -61,7 +61,7 @@
 
         <Button
             android:layout_marginTop="30dp"
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnSend"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#263238"

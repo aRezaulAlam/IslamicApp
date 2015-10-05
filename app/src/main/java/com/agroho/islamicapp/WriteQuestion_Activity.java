@@ -2,6 +2,7 @@ package com.agroho.islamicapp;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import org.apache.http.HttpEntity;
@@ -39,10 +41,15 @@ public class WriteQuestion_Activity extends AppCompatActivity {
     private ProgressDialog pDialog;
     EditText input1;
     EditText input2;
+    EditText FullNameInput;
+    EditText QuestionInput;
+    Button sendQuestion;
     String userName;
     String Contact;
     String name;
     String con;
+    String FullName;
+    String Question;
     private static String JsonUrl = "http://api.agroho.com/islam/islamicapp/create_user.php";
 
 
@@ -74,6 +81,77 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "SHaredPref without Dialog: " + name + " " + con, Toast.LENGTH_LONG).show();
         }
 
+        processQuestion();
+
+    }
+
+    private void processQuestion() {
+
+        FullNameInput = (EditText)findViewById(R.id.name);
+        QuestionInput = (EditText)findViewById(R.id.question);
+        sendQuestion = (Button)findViewById(R.id.btnSend);
+
+        sendQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FullName = FullNameInput.getText().toString();
+                Question = QuestionInput.getText().toString();
+                sendQuestionToDatabase(FullName,Question);
+                startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
+
+            }
+        });
+    }
+
+    private void sendQuestionToDatabase(final String fullName, final String question) {
+
+        class SendPostQuestionAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected String doInBackground(String... params) {
+                String paramUsername = params[0];
+                String paramAddress = params[1];
+
+                preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                name = preferenceSettings.getString("username", userName);
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("username", userName));
+                nameValuePairs.add(new BasicNameValuePair("fullname", fullName));
+                nameValuePairs.add(new BasicNameValuePair("qa_question", question));
+
+                try {
+                    HttpClient httpClient = new DefaultHttpClient();
+                    HttpPost httpPost = new HttpPost(
+                            "http://api.agroho.com/islam/islamicapp/ask_question.php");
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    HttpResponse response = httpClient.execute(httpPost);
+
+                    HttpEntity entity = response.getEntity();
+
+
+                } catch (ClientProtocolException e) {
+
+                } catch (IOException e) {
+
+                }
+                return "success";
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+
+                //TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
+                //textViewResult.setText("Inserted");
+            }
+        }
+        SendPostQuestionAsyncTask sendPostReqAsyncTask = new SendPostQuestionAsyncTask();
+        sendPostReqAsyncTask.execute(userName, fullName, question);
     }
 
 

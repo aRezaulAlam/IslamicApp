@@ -83,7 +83,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.new_msg){
-            startActivity(new Intent(this,QADetailsActivity.class));
+            startActivity(new Intent(this,WriteQuestion_Activity.class));
+        }
+
+        if (id == R.id.sync){
+            startActivity(new Intent(this,MainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
