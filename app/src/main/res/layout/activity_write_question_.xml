@@ -65,7 +65,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#263238"
-            android:text="Register"
+            android:text="Send Question"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

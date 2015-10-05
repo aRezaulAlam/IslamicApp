@@ -50,6 +50,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
     String con;
     String FullName;
     String Question;
+    String user_name;
     private static String JsonUrl = "http://api.agroho.com/islam/islamicapp/create_user.php";
 
 
@@ -66,7 +67,6 @@ public class WriteQuestion_Activity extends AppCompatActivity {
         //SharedPreferences.Editor editor = preferences.edit();
         //editor.putString("Name","Harneet");
         //editor.apply();
-
         preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         name = preferenceSettings.getString("username", userName);
@@ -80,6 +80,9 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "SHaredPref without Dialog: " + name + " " + con, Toast.LENGTH_LONG).show();
         }
+
+
+
 
         processQuestion();
 
@@ -97,6 +100,8 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
                 FullName = FullNameInput.getText().toString();
                 Question = QuestionInput.getText().toString();
+
+
                 sendQuestionToDatabase(FullName,Question);
                 startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
 
@@ -111,13 +116,15 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             protected String doInBackground(String... params) {
                 String paramUsername = params[0];
                 String paramAddress = params[1];
+                String paramwas = params[2];
 
                 preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                name = preferenceSettings.getString("username", userName);
+                 user_name = preferenceSettings.getString("username", userName);
+
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("username", userName));
+                nameValuePairs.add(new BasicNameValuePair("username", user_name));
                 nameValuePairs.add(new BasicNameValuePair("fullname", fullName));
                 nameValuePairs.add(new BasicNameValuePair("qa_question", question));
 
@@ -151,7 +158,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             }
         }
         SendPostQuestionAsyncTask sendPostReqAsyncTask = new SendPostQuestionAsyncTask();
-        sendPostReqAsyncTask.execute(userName, fullName, question);
+        sendPostReqAsyncTask.execute(user_name, fullName, question);
     }
 
 
@@ -203,7 +210,13 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
             }
         })
-                .setNegativeButton("Cancel", null);
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int Button) {
+                        startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
+                        dialog.cancel();
+                    }
+                });
         builder.create().show();
     }
 
