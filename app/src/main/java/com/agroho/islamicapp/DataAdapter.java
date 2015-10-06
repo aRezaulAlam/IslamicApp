@@ -88,7 +88,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
     public interface ClickListener{
 
-        public void itemClicked(View view , int position);
+        public void itemClicked(View view, int position);
     }
 
 
