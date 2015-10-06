@@ -24,9 +24,11 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import android.preference.PreferenceManager;
@@ -102,7 +104,10 @@ public class WriteQuestion_Activity extends AppCompatActivity {
                 Question = QuestionInput.getText().toString();
 
 
-                sendQuestionToDatabase(FullName,Question);
+
+
+
+                sendQuestionToDatabase(FullName, Question);
                 startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
 
             }
@@ -123,16 +128,30 @@ public class WriteQuestion_Activity extends AppCompatActivity {
                  user_name = preferenceSettings.getString("username", userName);
 
 
+
+
+
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("username", user_name));
                 nameValuePairs.add(new BasicNameValuePair("fullname", fullName));
                 nameValuePairs.add(new BasicNameValuePair("qa_question", question));
 
+
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
                     HttpPost httpPost = new HttpPost(
                             "http://api.agroho.com/islam/islamicapp/ask_question.php");
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+
+                    UrlEncodedFormEntity urlEncodedFormEntity = null;
+                    try {
+                        urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    httpPost.setEntity(urlEncodedFormEntity);
 
                     HttpResponse response = httpClient.execute(httpPost);
 
