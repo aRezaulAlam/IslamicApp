@@ -20,4 +20,8 @@
         <item>ক্যাটাগরি</item>
     </string-array>
     <string name="title_activity_qadetails">Answer</string>
+    <string name="title_activity_category_details">Category Details</string>
+    <string name="title_activity_category_details_questions">CategoryDetailsQuestionsActivity
+    </string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

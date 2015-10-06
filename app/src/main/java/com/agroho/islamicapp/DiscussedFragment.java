@@ -91,6 +91,8 @@ public class DiscussedFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Getting Discussed data...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         sendJsonRequest();
 
     }
@@ -102,7 +104,6 @@ public class DiscussedFragment extends Fragment {
             @Override
             public void onResponse(JSONArray response) {
                 progressDialog.dismiss();
-
                 listQA =  parseJsonResponse(response);
                 adapterQA.setQAList(listQA);
 

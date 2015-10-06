@@ -170,6 +170,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View promptView = inflater.inflate(R.layout.dialog_signin, null);
+        builder.setCancelable(false);
         builder.setView(promptView);
         input1 = (EditText)promptView.findViewById(R.id.username);
         input2 = (EditText)promptView.findViewById(R.id.contact);

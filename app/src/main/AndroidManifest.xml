@@ -33,6 +33,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.agroho.islamicapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".CategoryDetailsQuestionsActivity"
+            android:label="@string/title_activity_category_details_questions" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.agroho.islamicapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" >
+        </activity>
     </application>
 
 </manifest>

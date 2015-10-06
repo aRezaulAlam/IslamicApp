@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
        // mTabs.setViewPager();
     }
 
-    void onDrawerItemCLicked(int position){
+    void  onDrawerItemCLicked(int position){
         mPager.setCurrentItem(position);
     }
 
