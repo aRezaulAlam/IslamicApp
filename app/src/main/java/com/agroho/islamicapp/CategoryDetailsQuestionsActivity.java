@@ -61,7 +61,7 @@ public class CategoryDetailsQuestionsActivity extends AppCompatActivity {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Getting Answer...");
+        progressDialog.setMessage("বিষয়ভিত্তিক প্রশ্ন লোড হচ্ছে...");
         progressDialog.show();
 
 

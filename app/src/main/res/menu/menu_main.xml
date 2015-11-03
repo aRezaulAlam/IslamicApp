@@ -10,19 +10,19 @@
         app:showAsAction="never" />
 
 
+    <!--
+        <item android:id="@+id/new_msg"
+            android:title="@string/reload"
+            android:orderInCategory="200"
+            app:showAsAction="always"
+            android:icon="@drawable/msg"
+            ></item>
+    -->
+        <item android:id="@+id/sync"
+            android:title="Refreash"
+            android:orderInCategory="200"
+            app:showAsAction="always"
+            android:icon="@drawable/sync"
+            ></item>
 
-    <item android:id="@+id/new_msg"
-        android:title="@string/reload"
-        android:orderInCategory="200"
-        app:showAsAction="always"
-        android:icon="@drawable/msg"
-        ></item>
-
-    <item android:id="@+id/sync"
-        android:title="Refreash"
-        android:orderInCategory="200"
-        app:showAsAction="always"
-        android:icon="@drawable/sync"
-        ></item>
-
-</menu>
+    </menu>

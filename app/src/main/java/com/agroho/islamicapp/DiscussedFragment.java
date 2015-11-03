@@ -2,8 +2,10 @@ package com.agroho.islamicapp;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -89,10 +91,10 @@ public class DiscussedFragment extends Fragment {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Getting Discussed data...");
+        progressDialog.setMessage("প্রশ্ন ও উত্তর লোড হচ্ছে...");
         progressDialog.show();
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
+        //progressDialog.setCancelable(false);
+       // progressDialog.setCanceledOnTouchOutside(false);
         sendJsonRequest();
 
     }
@@ -198,6 +200,15 @@ public class DiscussedFragment extends Fragment {
         adapterQA = new QAAdapter(getActivity());
         MostDiscussed.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         MostDiscussed.setAdapter(adapterQA);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Write here anything that you wish to do on click of FAB
+                // Code to Add an item with default animation
+                startActivity(new Intent(getActivity(),WriteQuestion_Activity.class));
+            }
+        });
         sendJsonRequest();
         return view;
     }

@@ -44,7 +44,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolderCategory holder, int position) {
         CategoryPOJO currentQA = listCategory.get(position);
-        holder.catID.setText(currentQA.getCategoryId());
+        holder.catID.setText(currentQA.getcategoryCount());
         holder.catTitle.setText(currentQA.getGetCategoryName());
 
     }

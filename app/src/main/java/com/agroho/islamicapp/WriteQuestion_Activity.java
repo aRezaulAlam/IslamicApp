@@ -53,7 +53,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
     String FullName;
     String Question;
     String user_name;
-    private static String JsonUrl = "http://api.agroho.com/islam/islamicapp/create_user.php";
+    //private static String JsonUrl = "http://api.agroho.com/islam/islamicapp/create_user.php";
 
 
     @Override
@@ -80,7 +80,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
         } else {
 
-            Toast.makeText(getApplicationContext(), "SHaredPref without Dialog: " + name + " " + con, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "SHaredPref without Dialog: " + name + " " + con, Toast.LENGTH_LONG).show();
         }
 
 
@@ -100,15 +100,32 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                FullName = FullNameInput.getText().toString();
-                Question = QuestionInput.getText().toString();
+                ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+
+                Boolean isInternetPresent = cd.isConnectingToInternet();
+
+                if(isInternetPresent==true){
+
+                    if((FullNameInput.getText().toString().trim().length()>2) && QuestionInput.getText().toString().trim().length()>10){
+
+                        FullName = FullNameInput.getText().toString();
+                        Question = QuestionInput.getText().toString();
+
+                        sendQuestionToDatabase(FullName, Question);
+                        startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));}
+
+                    else {
+                        Toast.makeText(getApplicationContext(), "সঠিকভাবে প্রশ্ন করা  হয়নি। নুন্যতম ৩ অক্ষরের নাম ও ১১ অক্ষরের প্রশ্ন করতে হবে।  আবার চেষ্টা করুন", Toast.LENGTH_LONG).show();
+                        processQuestion();
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "ইন্টারনেট কানেকশন নেই। আপনার মোবাইলটি ইন্টারনেটের সাথে সংযুক্ত করুন", Toast.LENGTH_LONG).show();
+                    processQuestion();
+                }
 
 
 
-
-
-                sendQuestionToDatabase(FullName, Question);
-                startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
 
             }
         });
@@ -119,58 +136,70 @@ public class WriteQuestion_Activity extends AppCompatActivity {
         class SendPostQuestionAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected String doInBackground(String... params) {
-                String paramUsername = params[0];
-                String paramAddress = params[1];
-                String paramwas = params[2];
-
-                preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-                 user_name = preferenceSettings.getString("username", userName);
 
 
 
 
+                    String paramUsername = params[0];
+                    String paramAddress = params[1];
+                    String paramwas = params[2];
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("username", user_name));
-                nameValuePairs.add(new BasicNameValuePair("fullname", fullName));
-                nameValuePairs.add(new BasicNameValuePair("qa_question", question));
+                    preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-
-                try {
-                    HttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost(
-                            "http://api.agroho.com/islam/islamicapp/ask_question.php");
+                    user_name = preferenceSettings.getString("contact", Contact);
 
 
-                    UrlEncodedFormEntity urlEncodedFormEntity = null;
+
+
+
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("username", user_name));
+                    nameValuePairs.add(new BasicNameValuePair("fullname", fullName));
+                    nameValuePairs.add(new BasicNameValuePair("qa_question", question));
+
+
+
+
                     try {
-                        urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        HttpClient httpClient = new DefaultHttpClient();
+                        HttpPost httpPost = new HttpPost(
+                                "http://api.agroho.com/islam/islamicapp/ask_question.php");
+
+
+                        UrlEncodedFormEntity urlEncodedFormEntity = null;
+                        try {
+                            urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        httpPost.setEntity(urlEncodedFormEntity);
+
+                        HttpResponse response = httpClient.execute(httpPost);
+
+                        HttpEntity entity = response.getEntity();
+
+
+                    } catch (ClientProtocolException e) {
+
+                    } catch (IOException e) {
+
                     }
+                    return "success";
 
 
-                    httpPost.setEntity(urlEncodedFormEntity);
-
-                    HttpResponse response = httpClient.execute(httpPost);
-
-                    HttpEntity entity = response.getEntity();
 
 
-                } catch (ClientProtocolException e) {
 
-                } catch (IOException e) {
 
-                }
-                return "success";
             }
 
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
 
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "আপনার প্রশ্নটি পাঠানো সম্পন্ন হয়েছে।", Toast.LENGTH_SHORT).show();
 
                 //TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
                 //textViewResult.setText("Inserted");
@@ -194,51 +223,76 @@ public class WriteQuestion_Activity extends AppCompatActivity {
         input1 = (EditText)promptView.findViewById(R.id.username);
         input2 = (EditText)promptView.findViewById(R.id.contact);
                 // Add action buttons
-        builder.setPositiveButton("Signin", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("রেজিস্ট্রেশন করুন", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
-                if (input1.getText() != null && input2.getText() != null) {
+                ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
 
-                    // result.setText(userInput.getText());
-                    userName = input1.getText().toString();
-                    Contact = input2.getText().toString();
-                    hello();
-                    insertToDatabase(userName, Contact);
+                Boolean isInternetPresent = cd.isConnectingToInternet();
 
+                if (isInternetPresent == true) {
 
+                    if (input1.getText() != null && input2.getText() != null) {
 
-                    preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-                    //preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);
-                        preferenceEditor = preferenceSettings.edit();
-
-                        preferenceEditor.putString("username", userName);
-                        preferenceEditor.putString("contact", Contact);
-                        preferenceEditor.commit();
-
-                    preferenceSettings =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-                    name = preferenceSettings.getString("username", userName);
-                    con = preferenceSettings.getString("contact", Contact);
+                        // result.setText(userInput.getText());
+                        if ((input1.getText().toString().trim().length() > 3) && input2.getText().toString().trim().length() > 5) {
+                            userName = input1.getText().toString();
+                            Contact = input2.getText().toString();
+                            hello();
+                            insertToDatabase(userName, Contact);
 
 
-                    Toast.makeText(getApplicationContext(), "SHaredPref: "+ name +" "+ con, Toast.LENGTH_LONG).show();
+                            preferenceSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                            //preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);
+                            preferenceEditor = preferenceSettings.edit();
+
+                            preferenceEditor.putString("username", userName);
+                            preferenceEditor.putString("contact", Contact);
+                            preferenceEditor.commit();
+
+                            preferenceSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                            name = preferenceSettings.getString("username", userName);
+                            con = preferenceSettings.getString("contact", Contact);
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "সঠিকভাবে রেজিষ্ট্রেশন হয়নি। আবার চেষ্টা করুন", Toast.LENGTH_LONG).show();
+                            showDialog();
+                        }
+
+                    }
+
 
 
                 }
 
+                else {
+                    Toast.makeText(getApplicationContext(), "ইন্টারনেট কানেকশন নেই। আপনার মোবাইলটি ইন্টারনেটের সাথে সংযুক্ত করুন", Toast.LENGTH_LONG).show();
+                    showDialog();
+                }
+
+
             }
-        })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int Button) {
-                        startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
-                        dialog.cancel();
+            }
+
+            )
+                    .
+
+            setNegativeButton("বাতিল", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int Button) {
+                            startActivity(new Intent(WriteQuestion_Activity.this, MainActivity.class));
+                            dialog.cancel();
+                        }
                     }
-                });
-        builder.create().show();
-    }
+
+            );
+            builder.create().
+
+            show();
+        }
 
     private void insertToDatabase( final String userName, final String contact) {
 
@@ -247,6 +301,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             protected String doInBackground(String... params) {
                 String paramUsername = params[0];
                 String paramAddress = params[1];
+
 
 
 
@@ -277,7 +332,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
 
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "আপনার একাউন্ট তৈরি হয়েছে ", Toast.LENGTH_SHORT).show();
                 //TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
                 //textViewResult.setText("Inserted");
             }
@@ -288,7 +343,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
     private void hello() {
 
-        Toast.makeText(this,  userName+" "+Contact , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,  userName+" "+Contact , Toast.LENGTH_SHORT).show();
     }
 
     @Override

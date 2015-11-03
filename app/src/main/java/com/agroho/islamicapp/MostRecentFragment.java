@@ -2,7 +2,9 @@ package com.agroho.islamicapp;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -93,7 +95,7 @@ public class MostRecentFragment extends Fragment {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Getting Recent data...");
+        progressDialog.setMessage("প্রশ্ন ও উত্তর লোড হচ্ছে...");
         progressDialog.show();
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -109,17 +111,17 @@ public class MostRecentFragment extends Fragment {
         String name = preferenceSettings.getString("username", userName);
         String con = preferenceSettings.getString("contact", Contact);
 
-        Toast.makeText(getActivity(), name +" "+ con, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), name +" "+ con, Toast.LENGTH_SHORT).show();
 
 
 
         if (name==null && con==null) {
-             name = "1";
+            con = "0";
         }
 
-        final String URL = "http://api.agroho.com/islam/json/qa_recent.php?username="+name;
+        final String URL = "http://api.agroho.com/islam/json/qa_recent.php?username="+con;
 
-        Toast.makeText(getActivity(), URL, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), URL, Toast.LENGTH_SHORT).show();
 
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
@@ -221,6 +223,15 @@ public class MostRecentFragment extends Fragment {
         adapterQA = new QAAdapter(getActivity());
         MostRecent.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         MostRecent.setAdapter(adapterQA);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Write here anything that you wish to do on click of FAB
+                // Code to Add an item with default animation
+                startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
+            }
+        });
         sendJsonRequest();
         return view;
     }

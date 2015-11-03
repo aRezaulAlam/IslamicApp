@@ -2,6 +2,7 @@ package com.agroho.islamicapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class QADetailsActivity extends AppCompatActivity {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Getting Answer...");
+        progressDialog.setMessage("উত্তর লোড হচ্ছে...");
         progressDialog.show();
         sendJsonRequest();
     }
@@ -86,6 +87,9 @@ public class QADetailsActivity extends AppCompatActivity {
                 // Text ViewsS
                 textViewQAQuestion = (TextView)findViewById(R.id.qa_details_ques);
                 textViewQAAnswer = (TextView)findViewById(R.id.qadetails_answer);
+                Typeface font = Typeface.createFromAsset(getAssets(), "SolaimanLipi.ttf");
+                textViewQAQuestion.setTypeface(font);
+                textViewQAAnswer.setTypeface(font);
                 QAInfo currentQA = listQA.get(0);
                 textViewQAQuestion.setText(currentQA.getqaQuestion());
                 textViewQAAnswer.setText(currentQA.getqaAnswer());

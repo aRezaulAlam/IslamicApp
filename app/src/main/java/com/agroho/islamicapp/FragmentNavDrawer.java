@@ -71,8 +71,8 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
     public static List<Information> getData() {
 
         List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.ask, R.drawable.ask, R.drawable.ask, R.drawable.ask, R.drawable.ask};
-        String[] titles = {"প্রশ্ন ও উত্তর", "প্রশ্ন করুন", "মেসেজ বক্স", "যোগাযোগ"};
+        int[] icons = {R.drawable.qnaw, R.drawable.askqwhite, R.drawable.msgboxw, R.drawable.writeqw,R.drawable.info};
+        String[] titles = {"প্রশ্ন ও উত্তর", "প্রশ্ন করুন", "আমার প্রশ্ন", "যোগাযোগ","অ্যাপ বিষয়ক তথ্য"};
 
         for (int i = 0; i < titles.length & i < icons.length; i++) {
             Information current = new Information();
@@ -149,8 +149,11 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
             mDrawerLayout.closeDrawer(GravityCompat.START);
             ((MainActivity) getActivity()).onDrawerItemCLicked(1);
         }
-        else {
+        else if (position == 3){
             startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
+        }
+        else if (position == 4){
+            startActivity(new Intent(getActivity(), About.class));
         }
 /*
         if (position==1){

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
@@ -82,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.new_msg){
-            startActivity(new Intent(this,WriteQuestion_Activity.class));
-        }
+       // if (id == R.id.new_msg){
+        //    startActivity(new Intent(this,WriteQuestion_Activity.class));
+       // }
 
         if (id == R.id.sync){
             startActivity(new Intent(this,MainActivity.class));

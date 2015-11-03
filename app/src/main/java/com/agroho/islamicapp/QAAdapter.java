@@ -45,7 +45,7 @@ public class QAAdapter extends RecyclerView.Adapter<QAAdapter.ViewHolderQA> {
     @Override
     public void onBindViewHolder(ViewHolderQA holder, int position) {
         QAInfo currentQA = listQA.get(position);
-        holder.quesId.setText(currentQA.getId());
+        //holder.quesId.setText(currentQA.getId());
         holder.quesTitle.setText(currentQA.getqaTitle());
         holder.quesCategory.setText(currentQA.getCategory());
         //QAid = currentQA.getId();
@@ -60,7 +60,7 @@ public class QAAdapter extends RecyclerView.Adapter<QAAdapter.ViewHolderQA> {
 
      class ViewHolderQA extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-         private TextView quesId;
+         //private TextView quesId;
          private TextView quesTitle;
          private TextView quesCategory;
          QAInfo qaObj = new QAInfo();
@@ -69,7 +69,7 @@ public class QAAdapter extends RecyclerView.Adapter<QAAdapter.ViewHolderQA> {
 
          public ViewHolderQA(View itemView) {
              super(itemView);
-             quesId = (TextView) itemView.findViewById(R.id.question_id);
+             //quesId = (TextView) itemView.findViewById(R.id.question_id);
              quesTitle = (TextView) itemView.findViewById(R.id.question_title);
              quesCategory = (TextView) itemView.findViewById(R.id.question_category);
              Typeface font = Typeface.createFromAsset(context.getAssets(), "SolaimanLipi.ttf");

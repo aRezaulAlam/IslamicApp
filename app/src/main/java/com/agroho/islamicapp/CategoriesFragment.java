@@ -2,7 +2,9 @@ package com.agroho.islamicapp;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -89,7 +91,7 @@ public class CategoriesFragment extends Fragment {
         requestQueue=volleySingleton.getRequestQueue();
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading Categories...");
+        progressDialog.setMessage("লোড হচ্ছে...");
         progressDialog.show();
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -161,6 +163,8 @@ public class CategoriesFragment extends Fragment {
         for (int i=0; i<response.length();i++){
             try {
                 JSONObject obj = response.getJSONObject(i);
+                String RawCatCount = obj.getString("cat_count");
+                String CatCount = "("+RawCatCount+")";
                 String CatId = obj.getString("cat_id");
                 String CatTitle = obj.getString("cat_name");
                 //String QAQuestion = obj.getString("qa_question");
@@ -170,6 +174,7 @@ public class CategoriesFragment extends Fragment {
 
                 catObj.setCategoryId(CatId);
                 catObj.setGetCategoryName(CatTitle);
+                catObj.setcategoryCount(CatCount);
                 //qaObj.setCategory(QAQuestion);
                 //qaObj.setDetailsUrl(QAAnswer);
                 //qaObj.setCategory(QACategory);
@@ -200,6 +205,15 @@ public class CategoriesFragment extends Fragment {
         adapterCategory = new CategoryAdapter(getActivity());
         Category.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         Category.setAdapter(adapterCategory);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Write here anything that you wish to do on click of FAB
+                // Code to Add an item with default animation
+                startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
+            }
+        });
         sendJsonRequest();
         return view;
     }

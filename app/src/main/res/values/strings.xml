@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ইসলামিক প্রশ্ন ও উত্তর </string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">ইসলামিক প্রশ্ন ও উত্তর </string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -12,16 +12,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_write_question_">WriteQuestion_Activity</string>
+    <string name="title_activity_write_question_">প্রশ্ন করুন</string>
 
     <string-array name="tabs">
         <item>প্রশ্ন ও উত্তর </item>
         <item>আমার প্রশ্ন</item>
-        <item>ক্যাটাগরি</item>
+        <item>বিষয়ভিত্তিক প্রশ্ন</item>
     </string-array>
-    <string name="title_activity_qadetails">Answer</string>
+    <string name="title_activity_qadetails">উত্তর</string>
     <string name="title_activity_category_details">Category Details</string>
-    <string name="title_activity_category_details_questions">CategoryDetailsQuestionsActivity
+    <string name="title_activity_category_details_questions">বিষয়ভিত্তিক প্রশ্ন
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_about">অ্যাপ সম্পর্কিত তথ্য</string>
 </resources>

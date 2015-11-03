@@ -12,7 +12,7 @@
         android:text="1234"
         android:paddingLeft="16dp"
         android:textSize="14dp"
-        android:paddingBottom="20dp"
+
         android:paddingRight="16dp"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/category_title"
@@ -30,7 +30,7 @@
         android:textColor="#212121"
         android:gravity="center|top"
         android:text="User Problem"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
