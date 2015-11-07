@@ -25,4 +25,5 @@
     </string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_about">অ্যাপ সম্পর্কিত তথ্য</string>
+    <string name="title_activity_notice">Notice</string>
 </resources>

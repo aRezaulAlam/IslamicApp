@@ -51,8 +51,8 @@
             android:textColor="#263238"
             android:textColorHint="#263238"
             android:layout_below="@+id/name"
-            android:layout_above="@+id/btnSend"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:layout_above="@+id/btnSend" />
 
 
 

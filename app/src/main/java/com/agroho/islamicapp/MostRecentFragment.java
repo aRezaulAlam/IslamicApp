@@ -117,11 +117,12 @@ public class MostRecentFragment extends Fragment {
 
         if (name==null && con==null) {
             con = "0";
+            name = "0";
         }
 
-        final String URL = "http://api.agroho.com/islam/json/qa_recent.php?username="+con;
+        final String URL = "http://api.agroho.com/islam/json/qa_recent.php?username="+con+"&pin="+name;
 
-       // Toast.makeText(getActivity(), URL, Toast.LENGTH_SHORT).show();
+       //Toast.makeText(getActivity(), URL, Toast.LENGTH_SHORT).show();
 
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {

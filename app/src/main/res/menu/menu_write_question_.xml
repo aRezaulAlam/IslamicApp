@@ -4,4 +4,11 @@
     tools:context="com.agroho.islamicapp.WriteQuestion_Activity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/send"
+        android:title="Send"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/send"
+        ></item>
 </menu>

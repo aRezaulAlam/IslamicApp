@@ -1,6 +1,7 @@
 package com.agroho.islamicapp;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().findFragmentById(R.id.navdrawer);
         drawerFragment.setup(R.id.navdrawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
+        domPager();
+
+
+       // mTabs.setViewPager();
+    }
+
+    private void domPager() {
+
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         mTabs = (SlidingTabLayout)findViewById(R.id.tabs);
@@ -55,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mTabs.setViewPager(mPager);
-       // mTabs.setViewPager();
     }
 
     void  onDrawerItemCLicked(int position){
         mPager.setCurrentItem(position);
     }
+
+
 
 
 
@@ -88,7 +98,22 @@ public class MainActivity extends AppCompatActivity {
        // }
 
         if (id == R.id.sync){
-            startActivity(new Intent(this,MainActivity.class));
+            Intent intent = getIntent();
+            finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+        }
+
+        if (id == R.id.fb){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/bdislamq/"));
+            startActivity(intent);
+
+        }
+
+        if (id == R.id.like){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.agroho.uniadmission"));
+
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

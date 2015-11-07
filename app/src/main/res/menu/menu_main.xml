@@ -25,4 +25,18 @@
             android:icon="@drawable/sync"
             ></item>
 
-    </menu>
+    <item android:id="@+id/like"
+        android:title="Refreash"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/like"
+        ></item>
+
+    <item android:id="@+id/fb"
+        android:title="Facebook Page"
+        android:orderInCategory="200"
+        app:showAsAction="never"
+        ></item>
+
+
+</menu>
