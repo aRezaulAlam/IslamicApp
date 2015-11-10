@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ public class Notice extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String msg = extras.getString("message");
+        notificationDetails.setMovementMethod(new ScrollingMovementMethod());
         notificationDetails.setText(msg);
         //LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("message_recieved"));
         OKNotification();
@@ -103,9 +105,6 @@ public class Notice extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

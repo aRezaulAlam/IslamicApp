@@ -385,20 +385,20 @@ public class WriteQuestion_Activity extends AppCompatActivity {
 
     public void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // Get the layout inflater
-        LayoutInflater inflater = getLayoutInflater();
+                // Get the layout inflater
+                LayoutInflater inflater = getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        View promptView = inflater.inflate(R.layout.dialog_signin, null);
-        builder.setCancelable(false);
-        builder.setView(promptView);
-        input1 = (EditText)promptView.findViewById(R.id.username);
-        input2 = (EditText)promptView.findViewById(R.id.contact);
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                View promptView = inflater.inflate(R.layout.dialog_signin, null);
+                builder.setCancelable(false);
+                builder.setView(promptView);
+                input1 = (EditText)promptView.findViewById(R.id.username);
+                input2 = (EditText)promptView.findViewById(R.id.contact);
                 // Add action buttons
-        builder.setPositiveButton("রেজিস্ট্রেশন করুন", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
+                builder.setPositiveButton("রেজিস্ট্রেশন করুন", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
 
                 ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
 
@@ -460,6 +460,7 @@ public class WriteQuestion_Activity extends AppCompatActivity {
                 }
 
                 else {
+
                     Toast.makeText(getApplicationContext(), "ইন্টারনেট কানেকশন নেই। আপনার মোবাইলটি ইন্টারনেটের সাথে সংযুক্ত করুন", Toast.LENGTH_LONG).show();
                     showDialog();
                 }

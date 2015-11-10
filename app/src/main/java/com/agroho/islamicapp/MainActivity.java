@@ -89,19 +89,23 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
        // if (id == R.id.new_msg){
         //    startActivity(new Intent(this,WriteQuestion_Activity.class));
        // }
 
         if (id == R.id.sync){
+            startActivity(new Intent(this,MainActivity.class));
+
+            /*
             Intent intent = getIntent();
             finish();
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+
+             */
+
         }
 
         if (id == R.id.fb){

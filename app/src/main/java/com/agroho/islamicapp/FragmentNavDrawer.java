@@ -71,8 +71,8 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
     public static List<Information> getData() {
 
         List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.qnaw, R.drawable.askqwhite, R.drawable.msgboxw, R.drawable.writeqw,R.drawable.info};
-        String[] titles = {"প্রশ্ন ও উত্তর", "প্রশ্ন করুন", "আমার প্রশ্ন", "যোগাযোগ","অ্যাপ বিষয়ক তথ্য"};
+        int[] icons = {R.drawable.qnaw, R.drawable.topicwise, R.drawable.askqwhite, R.drawable.msgboxw, R.drawable.writeqw,R.drawable.info};
+        String[] titles = {"প্রশ্ন ও উত্তর", "বিষয়ভিত্তিক প্রশ্ন","প্রশ্ন করুন", "আমার প্রশ্ন", "যোগাযোগ","অ্যাপ বিষয়ক তথ্য"};
 
         for (int i = 0; i < titles.length & i < icons.length; i++) {
             Information current = new Information();
@@ -143,16 +143,19 @@ public class FragmentNavDrawer extends Fragment implements DataAdapter.ClickList
         if (position == 0) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             ((MainActivity) getActivity()).onDrawerItemCLicked(position);
-        } else if(position == 1){
+        } else if (position == 1) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            ((MainActivity) getActivity()).onDrawerItemCLicked(2);
+        }else if(position == 2){
             startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
-        } else if (position == 2) {
+        } else if (position == 3) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             ((MainActivity) getActivity()).onDrawerItemCLicked(1);
         }
-        else if (position == 3){
+        else if (position == 4){
             startActivity(new Intent(getActivity(), WriteQuestion_Activity.class));
         }
-        else if (position == 4){
+        else if (position == 5){
             startActivity(new Intent(getActivity(), About.class));
         }
 /*

@@ -130,6 +130,8 @@ public class CategoriesFragment extends Fragment {
     private void VolleyErrorNotice(VolleyError error) {
 
         if (error instanceof TimeoutError || error instanceof NoConnectionError){
+            startActivity(new Intent(getActivity(), InternetDisconnected.class));
+
 
             Toast.makeText(getActivity(), "No Internet Connection Please Connect to internet", Toast.LENGTH_SHORT).show();
 

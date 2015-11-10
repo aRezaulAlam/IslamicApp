@@ -75,24 +75,23 @@
             </intent-filter>
         </receiver>
 
-
-
-        <service android:name=".GCMIntentService"
+        <service
+            android:name=".GCMIntentService"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
             <intent-filter>
-
                 <action android:name="android.service.notification.NotificationListenerService" />
-
             </intent-filter>
-
         </service>
         <!-- make sure to add google-play-services_lib from  project properties->android->library -->
 
         <activity
             android:name=".Notice"
             android:label="@string/title_activity_notice" >
+        </activity>
+        <activity
+            android:name=".InternetDisconnected"
+            android:label="@string/title_activity_internet_disconnected" >
         </activity>
     </application>
 

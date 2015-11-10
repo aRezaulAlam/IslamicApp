@@ -115,6 +115,8 @@ public class QADetailsActivity extends AppCompatActivity {
     private void VolleyErrorNotice(VolleyError error) {
 
         if (error instanceof TimeoutError || error instanceof NoConnectionError){
+            startActivity(new Intent(this, InternetDisconnected.class));
+
 
             Toast.makeText(this, "No Internet Connection Please Connect to internet", Toast.LENGTH_SHORT).show();
 
