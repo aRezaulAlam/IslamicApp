@@ -181,7 +181,7 @@ public class MostRecentFragment extends Fragment {
     private ArrayList<QAInfo> parseJsonResponse(JSONArray response) {
         ArrayList<QAInfo> listQA = new ArrayList<>();
         if (response == null || response.length()==0){
-            Toast.makeText(getActivity(), "Nothing Found", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Nothing Found", Toast.LENGTH_SHORT).show();
 
         }
 

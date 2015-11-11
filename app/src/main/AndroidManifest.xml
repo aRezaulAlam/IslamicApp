@@ -27,6 +27,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +44,7 @@
         </activity>
         <activity
             android:name=".QADetailsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_qadetails" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -50,6 +52,7 @@
         </activity>
         <activity
             android:name=".CategoryDetailsQuestionsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_category_details_questions" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,6 +60,7 @@
         </activity>
         <activity
             android:name=".About"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_about" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -87,10 +91,12 @@
 
         <activity
             android:name=".Notice"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_notice" >
         </activity>
         <activity
             android:name=".InternetDisconnected"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_internet_disconnected" >
         </activity>
     </application>

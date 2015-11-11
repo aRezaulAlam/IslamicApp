@@ -59,7 +59,10 @@
         android:layout_height="wrap_content"
         android:text="Go to Home Page"
         android:id="@+id/not_ok"
-        android:layout_marginBottom="33dp"
+        android:textColor="#FFFFFF"
+        android:padding="10dp"
+        android:background="@color/ColorPrimaryDark"
+        android:layout_marginBottom="53dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

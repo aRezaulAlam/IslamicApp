@@ -18,7 +18,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="সংখ্যা পাসওয়ার্ড দিন" />
+        android:hint="৬ সংখ্যার পিন লিখুন" />
     <EditText
         android:id="@+id/contact"
         android:layout_width="match_parent"

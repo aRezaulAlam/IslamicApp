@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private SlidingTabLayout mTabs;
 
     public static final int MOST_DISCUSSED = 0;
-    public static final int MOST_RECENT = 1;
-    public static final int CATEGORIES = 2;
+    public static final int MOST_RECENT = 2 ;
+    public static final int CATEGORIES = 1;
 
 
     @Override
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.like){
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.agroho.uniadmission"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.agroho.islamicapp"));
 
             startActivity(intent);
         }
